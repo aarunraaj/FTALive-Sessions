@@ -109,18 +109,6 @@ A drawback with the traditional CNI is the exhaustion of pod IP addresses as the
 
 The new [dynamic IP](https://docs.microsoft.com/en-us/azure/aks/configure-azure-cni#dynamic-allocation-of-ips-and-enhanced-subnet-support-preview) allocation capability in Azure CNI solves this problem by allotting pod IPs from a subnet separate from the subnet hosting the AKS cluster.
 
-### The IP tables in Azure Kubernetes Service
-
-- Cluster level rules for each service.
-- KUBE-MARK-MASQ, KUBE-SVC-xyz, and KUBE-SEP-xyz rules.
-
-IP tables for Azure CNI use one additional rule chain "MASQUERADE" which is called by post routing chain. It is one of the last steps if the packets are leaving cluster. This sets the source IP to the node IP.
-
-The two ways that Azure provides network policies use Linux IP tables to control the traffic between pods.
-[Create an AKS cluster with network policies](https://docs.microsoft.com/azure/aks/use-network-policies#network-policy-options-in-aks).
-
-> Walkthrough the customer on the rules and rule chains and how the routing decision has been made.
-
 ### If Azure Application Gateway is used, how the networking between Application gateway and AKS can be setup?
 
 Refer [How to setup networking between Application gateway and AKS](https://azure.github.io/application-gateway-kubernetes-ingress/how-tos/networking/#with-kubenet)
@@ -197,18 +185,6 @@ How to [restrict egress traffic using Azure Firewall?](https://docs.microsoft.co
 ### Managed NAT Gateway
 
 Whilst AKS customers are able to route egress traffic through an Azure Load Balancer, there are limitations on the amount of outbound flows of traffic that is possible.
-
-### Different Types of Services in Kubernetes
-
-[Basic Concepts of Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/)
-
-- ClusterIP : Default Kubernetes service accessible inside the Kubernetes cluster - no external access.
-- NodePort : Most primitive way to get external traffic directly to your service. It opens a specific port on all the Nodes and any traffic sent to this port is forwarded to the service.
-- LoadBalancer : Standard way to expose a service to the internet. In Azure, this will spin up an Azure Load Balancer (L4) that gives us a single public IP address that forwards all traffic to your service.
-  - [How to create an internal LoadBalancer](https://docs.microsoft.com/azure/aks/internal-lb)
-  - [How to create a Standard LoadBalancer](https://docs.microsoft.com/azure/aks/load-balancer-standard)
-  - [Use a static public IP address and DNS label with the AKS load balancer](https://docs.microsoft.com/azure/aks/static-ip)
-- External DNS : Creates a specific DNS entry for easier application access.
 
 [Cluster egress with Managed NAT Gateway](https://docs.microsoft.com/en-us/azure/aks/nat-gateway)
 
@@ -511,3 +487,14 @@ OSM can be integrated with [Azure Monitor and Azure Application insights](https:
 OSM can also be integrated with [Prometheus and Grafana](https://release-v0-11.docs.openservicemesh.io/docs/demos/prometheus_grafana/):
 
 [**Getting Started with Open Service Mesh**](https://learn.microsoft.com/en-us/azure/aks/open-service-mesh-about)
+
+### The IP tables in Azure Kubernetes Service
+
+- Cluster level rules for each service.
+- KUBE-MARK-MASQ, KUBE-SVC-xyz, and KUBE-SEP-xyz rules.
+
+IP tables for Azure CNI use one additional rule chain "MASQUERADE" which is called by post routing chain. It is one of the last steps if the packets are leaving cluster. This sets the source IP to the node IP.
+
+The two ways that Azure provides network policies use Linux IP tables to control the traffic between pods.
+
+[Create an AKS cluster with network policies](https://docs.microsoft.com/azure/aks/use-network-policies#network-policy-options-in-aks).
