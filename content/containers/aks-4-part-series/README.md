@@ -42,7 +42,7 @@ In the first two sessions we examined how to design an AKS cluster with networki
 
 [Handout for Cluster Deployment](../aks-cluster-deployment/README.md)
 
-[Handout for Workload Deployment](../)
+[Handout for Workload Deployment](../aks-workload-deployment/readme.md)
 
 # Day 4
 ### Operations and Monitoring

@@ -16,3 +16,5 @@ This table of contents links to the materials for the respective FTA Live sessio
 - [AKS Monitoring Patterns and Practices](./aks-monitoring/)
 - [AKS Operations](./aks-operations/)
 - [AKS Security Best Practices](./aks-security/)
+- [AKS Cluster Deployment](./aks-cluster-deployment/README.md)
+- [AKS Workload Deployment](./aks-workload-deployment/readme.md)
